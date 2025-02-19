@@ -5,6 +5,33 @@
   
   <entry>
     <title>Hello World</title>
+    <link href="/2025/02/19/my-post/"/>
+    <url>/2025/02/19/my-post/</url>
+    
+    <content type="html"><![CDATA[<p>这是一个测试</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Diary</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>PS3</tag>
+      
+      <tag>Games</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
     <link href="/2025/02/19/hello-world/"/>
     <url>/2025/02/19/hello-world/</url>
     
