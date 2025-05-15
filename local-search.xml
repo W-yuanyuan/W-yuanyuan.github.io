@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>DSA图像分割</title>
+    <link href="/2025/05/15/cuda_error1/"/>
+    <url>/2025/05/15/cuda_error1/</url>
+    
+    <content type="html"><![CDATA[<p>pycharm加载cuda环境时，报错，提示”No such file or directory”</p><p><a href="https://imgse.com/i/pEjg5RI"><img src="https://s21.ax1x.com/2025/05/15/pEjg5RI.png" alt="pEjg5RI.png"></a></p><p>提示，没有文件或目录，但是打开anaconda下的envs里却有相关文件。<br>诡异的是，我在pycharm社区版里使用同样的方式，却可以加载环境成功，专业版就出错。</p><p>后来，经过多方查找，将环境目录改为Anaconda下的scripts文件夹下的conda.exe，<br>然后在使用现有环境中选择自己所需的环境，加载成功。</p><p><a href="https://imgse.com/i/pEjgLdg"><img src="https://s21.ax1x.com/2025/05/15/pEjgLdg.jpg" alt="pEjgLdg.jpg"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>报错处理</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cuda报错</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>DSA图像分割</title>
+    <link href="/2025/05/15/DSA/"/>
+    <url>/2025/05/15/DSA/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>医学图像分割</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>医学图像分割</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>算法模版</title>
     <link href="/2025/03/31/algorithm_template/"/>
     <url>/2025/03/31/algorithm_template/</url>
