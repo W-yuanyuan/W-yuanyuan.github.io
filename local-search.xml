@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>分布式Web服务器</title>
+    <link href="/2026/03/23/web_service/"/>
+    <url>/2026/03/23/web_service/</url>
+    
+    <content type="html"><![CDATA[<h1 id="分布式web服务器"><a href="#分布式web服务器" class="headerlink" title="分布式web服务器"></a>分布式web服务器</h1><h2 id="ch1-基础概念"><a href="#ch1-基础概念" class="headerlink" title="ch1 基础概念"></a>ch1 基础概念</h2><ol><li>什么是服务器</li></ol><ul><li>硬件：一台配置高的电脑</li><li>软件：电脑必须有一个能够解析http协议的软件</li></ul><ol start="2"><li>常见的web服务器</li></ol><ul><li>tomcat服务器</li><li>weblogic服务器</li><li>IIS服务器</li><li>nginx</li></ul><ol start="3"><li>客户端</li></ol><p>网络架构：</p><ul><li>b&#x2F;s  使用浏览器和服务器交互</li><li>c&#x2F;s  使用客户端软件（qt等）和服务器交互</li></ul><ol start="4"><li>服务器端</li></ol><p>Nginx：</p><ul><li>能处理静态请求</li><li>动态请求无法处理</li><li>服务器集群之后，每台服务器上部署的内容相同</li></ul><p>FastCGI：</p><ul><li>fastCGI可以用来处理动态请求</li></ul><p>反向代理服务器：</p><ul><li>客户端不能直接访问服务器，是发给反向代理服务器，然后由反向代理服务器转发给服务器</li></ul><p>关系型数据库：</p><ul><li>存储文件属性信息</li><li>用户的属性信息</li></ul><p>redis-非关系型数据库（内存数据库）</p><ul><li>提高效率</li><li>存储服务器经常要从关系型数据中读取的数据</li></ul><p>FASTDFS-分布式文件系统</p><ul><li>文件分布在不同系统上</li></ul><ol start="5"><li>FastDFS介绍：</li></ol><ul><li>用C语言编写的一款开源的分布式文件系统</li><li>为互联网量身定制，充分考虑了冗余备份、负载均衡、线性扩容等机制</li><li>可以很容易搭建一套高性能的文件服务器集群，提供文件上传、下载等服务</li></ul><p>fastDFS中的三个角色：</p><ul><li><p>追踪器（管理者）：管理存储节点（守护进程）</p></li><li><p>存储节点（普通进程）  </p></li><li><p>客户端：文件上传、文件下载</p></li></ul><hr><h2 id="ch2-Redis（非关系型数据库）"><a href="#ch2-Redis（非关系型数据库）" class="headerlink" title="ch2 Redis（非关系型数据库）"></a>ch2 Redis（非关系型数据库）</h2><p>主要应用在服务器端</p><ol><li>关系型数据库</li></ol><ul><li>操作数据必须使用sql语句</li><li>数据存储在磁盘</li><li>举例：mysql、oracl、sqlite</li></ul><ol start="2"><li>非关系型数据库</li></ol><ul><li>操作数据使用命令</li><li>数据以键值对的方式存储</li><li>速度快、效率高</li><li>存储的数据量小</li></ul><p><img src="https://picui.ogmua.cn/s1/2026/03/23/69c0e9a815e98.webp" alt="image-20250308171527492"></p><p>RDBMS：Relational Database Management System</p><p>所有数据默认存储在关系型数据库中</p><p>客户端访问服务器，有一些数据，服务器需要频繁的查询数据</p><ol><li>安装包下载：</li></ol><p><a href="http://redis.cn/">链接</a></p><ol start="2"><li>安装：</li></ol><ul><li>make</li><li>make install</li></ul><ol start="3"><li>redis中的两个角色</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">服务器 - 启动</span><br>redis-server # 默认启动<br>redis-server confFileName # 根据配置文件的设置启动<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">客户端</span><br>redis-cli # 默认链接本地 绑定了6379默认端口的服务器<br>redis-cli -p 端口号<br>redis-cli -h ip地址 -p 端口 # 连接远程主机的制定端口的redis<br></code></pre></td></tr></table></figure><ol start="4"><li>redis中数据的组织形式</li></ol><p>键值对：key必须是字符串、value是可选的</p><p>value有：string、list、set、sortedset、hash</p><p>string：字符串</p><p>list：存储多个string字符串</p><p>set：元素不重复、数据是无序的</p><p>sortedset：排序集合，集合中的元素分为两部分</p><p>[分数，成员] -&gt; [66, “tom”]</p><p>hash：用数组来实现的</p><ol start="5"><li>redis的数据持久化</li></ol><ul><li>rdb方式</li></ul><p>默认的方式</p><p>磁盘的持久化文件后缀为.rdb</p><p>将内存数据以二进制的方式直接写入磁盘文件</p><p>文件比较小，恢复时间短</p><p>以用户设定的频率-&gt;容易丢失数据</p><ul><li>aof方式</li></ul><p>磁盘的持久化文件后缀为.aof</p><p>直接将生成数据的命令写入磁盘文件</p><p>文件比较大，恢复时间长，效率低</p><p>以某种频率-&gt;1second</p><p>数据完整性高</p><h2 id="ch3-nginx服务器"><a href="#ch3-nginx服务器" class="headerlink" title="ch3 nginx服务器"></a>ch3 nginx服务器</h2><ol><li>介绍</li></ol><ul><li>开源的矿浆</li><li>C语言写的</li></ul><ol start="2"><li>作用</li></ol><ul><li>作为web服务器：解析http协议</li><li>反向代理服务器</li><li>邮件服务器：解析邮件相关的协议</li></ul><ol start="3"><li>优势</li></ol><ul><li>更快：高峰期可以比其他web服务器更快的相应请求</li><li>更可靠</li><li>高扩展</li><li>低内存消耗</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>服务器</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>web服务器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>深度学习入门</title>
     <link href="/2026/03/23/Deeplearn_1/"/>
     <url>/2026/03/23/Deeplearn_1/</url>
